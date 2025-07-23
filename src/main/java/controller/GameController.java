@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 
 public class GameController implements ActionListener {
 
@@ -33,25 +34,26 @@ public class GameController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // --- Actualiza el estado del Juego ---
-        // Falta implementar otras clases.
-
+        player.update();
         gamePanel.repaint();
     }
 
     public void handleKeyPress(int keyCode) {
-        if (keyCode == KeyEvent.VK_LEFT) {
-            player.moveLeft();
-            if (player.getX() > 0) {
-                player.setX(0);
-            }
-        } else if (keyCode == KeyEvent.VK_RIGHT) {
-            player.moveRight();
-            if (player.getX() > gamePanel.getWidth() - player.getWidth()) {
-                player.setX(gamePanel.getWidth() - player.getWidth());
-            }
+        if (keyCode == KeyEvent.VK_A) {
+            player.setMovingLeft(true);
+        } else if (keyCode == KeyEvent.VK_D) {
+            player.setMovingRight(true);
         } else if (keyCode == KeyEvent.VK_SPACE) {
             System.out.println("Disparo!");
+        }
+    }
+
+    public void handleKeyRelease(int keyCode) {
+        if (keyCode == KeyEvent.VK_A) {
+            player.setMovingLeft(false);
+        }
+        if (keyCode == KeyEvent.VK_D) {
+            player.setMovingRight(false);
         }
     }
 
