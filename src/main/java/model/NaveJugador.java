@@ -51,10 +51,6 @@ public class NaveJugador {
     }
 
     // -- Comportamiento de la nave --
-    public void moveLeft() {
-        this.x -= speed;
-    }
-
     public void setMovingLeft(boolean movingLeft) {
         this.movingLeft = movingLeft;
         if (movingLeft) this.movingRight = false;
@@ -63,10 +59,6 @@ public class NaveJugador {
     public void setMovingRight(boolean movingRight) {
         this.movingRight = movingRight;
         if (movingRight) this.movingLeft = false;
-    }
-
-    public void moveRight() {
-        this.x += speed;
     }
 
     public void moveUp() {
