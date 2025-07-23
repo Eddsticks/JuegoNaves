@@ -1,6 +1,9 @@
 package model;
 
-import java.awt.Rectangle; //representa colisiones
+import java.awt.Rectangle;
+import view.GamePanel;
+import java.awt.Graphics;
+import java.awt.Color;
 
 public class NaveJugador {
 
@@ -12,6 +15,9 @@ public class NaveJugador {
     private int speed;
     private int health;
 
+    private boolean movingLeft;
+    private boolean movingRight;
+
     public NaveJugador(int initialX, int initialY, int width, int height, int speed, int initialHealth) {
         this.x = initialX;
         this.y = initialY;
@@ -21,9 +27,42 @@ public class NaveJugador {
         this.health = initialHealth;
     }
 
+    public void update() {
+        if (movingLeft) {
+            x -= speed;
+        }
+
+        if (movingRight) {
+            x += speed;
+        }
+
+        if (x < 0) {
+            x = 0;
+        }
+
+        if (x > GamePanel.ANCHO - width) {
+            x = GamePanel.ANCHO - width;
+        }
+    }
+
+    public void draw(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.fillRect(x, y, width, height);
+    }
+
     // -- Comportamiento de la nave --
     public void moveLeft() {
         this.x -= speed;
+    }
+
+    public void setMovingLeft(boolean movingLeft) {
+        this.movingLeft = movingLeft;
+        if (movingLeft) this.movingRight = false;
+    }
+
+    public void setMovingRight(boolean movingRight) {
+        this.movingRight = movingRight;
+        if (movingRight) this.movingLeft = false;
     }
 
     public void moveRight() {
